@@ -9,6 +9,9 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final photo = ModalRoute.of(context)!.settings.arguments as PhotoModel;
+    const backgroundColor = Colors.green;
+    const textStyle = TextStyle(color: Colors.white, fontSize: 20);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Detalhes"),
@@ -19,28 +22,110 @@ class DetailsPage extends StatelessWidget {
             width: photo.image.width,
             child: photo.image,
           ),
-          ListTile(
-            title: Row(
-              children: [
-                const Text("ID: "),
-                Text(photo.id.toString()),
-              ],
+          Container(
+            color: backgroundColor,
+            child: ListTile(
+              title: Row(
+                children: [
+                  const Text(
+                    "ID: ",
+                    style: textStyle,
+                  ),
+                  Text(
+                    photo.id.toString(),
+                    style: textStyle,
+                  ),
+                ],
+              ),
             ),
           ),
-          ListTile(
-            title: Row(
-              children: [
-                const Text("Cultura: "),
-                Text(photo.cultura.name),
-              ],
+          Container(
+            color: backgroundColor,
+            child: ListTile(
+              title: Row(
+                children: [
+                  const Text(
+                    "Cultura: ",
+                    style: textStyle,
+                  ),
+                  Text(
+                    photo.cultura.name,
+                    style: textStyle,
+                  ),
+                ],
+              ),
             ),
           ),
-          ListTile(
-            title: Row(
-              children: [
-                const Text("Nivel de água: "),
-                Text(photo.nivelDeAgua.name),
-              ],
+          Container(
+            color: backgroundColor,
+            child: ListTile(
+              title: Row(
+                children: [
+                  const Text(
+                    "Nivel de água: ",
+                    style: textStyle,
+                  ),
+                  Text(
+                    photo.nivelDeAgua.name,
+                    style: textStyle,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            color: backgroundColor,
+            child: ListTile(
+              title: photo.deficienciaNutrientes == null ||
+                      photo.deficienciaNutrientes!.isEmpty
+                  ? const Text(
+                      "Sem deficiencia nutrientes",
+                      style: textStyle,
+                    )
+                  : Row(
+                      children: [
+                        const Text(
+                          "Nutrienteas em falta: ",
+                          style: textStyle,
+                        ),
+                        Column(
+                          children: List.generate(
+                            photo.deficienciaNutrientes!.length,
+                            (index) => Text(
+                              photo.deficienciaNutrientes![index].name,
+                              style: textStyle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
+          ),
+          Container(
+            color: backgroundColor,
+            child: ListTile(
+              title: photo.pragasDoencas == null || photo.pragasDoencas!.isEmpty
+                  ? const Text(
+                      "Sem pragas e doenças",
+                      style: textStyle,
+                    )
+                  : Row(
+                      children: [
+                        const Text(
+                          "Pragas e doenças: ",
+                          style: textStyle,
+                        ),
+                        Column(
+                          children: List.generate(
+                            photo.pragasDoencas!.length,
+                            (index) => Text(
+                              photo.pragasDoencas![index].name,
+                              style: textStyle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
             ),
           ),
         ],

@@ -8,16 +8,16 @@ class PhotoModel {
   int id;
   Image image;
   Culturas cultura;
-  List<PragasDoencas>? pragasDoencas;
   List<Nutrientes>? deficienciaNutrientes;
+  List<PragasDoencas>? pragasDoencas;
   NivelDeAgua nivelDeAgua;
 
   PhotoModel({
     required this.id,
     required this.image,
     required this.cultura,
-    this.pragasDoencas,
     this.deficienciaNutrientes,
+    this.pragasDoencas,
     required this.nivelDeAgua,
   });
 }
