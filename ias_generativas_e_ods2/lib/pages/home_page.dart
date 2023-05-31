@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ias_generativas_e_ods2/pages/dashboard_page.dart';
 import 'package:ias_generativas_e_ods2/pages/galeria_page.dart';
+import 'package:ias_generativas_e_ods2/pages/history_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
       children: const [
         DashboardPage(),
         GaleryPage(),
+        HistoryPage(),
       ],
     );
   }
@@ -38,6 +40,8 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(Icons.dashboard_outlined), label: 'Dashboard'),
       const BottomNavigationBarItem(
           icon: Icon(Icons.photo_album_outlined), label: 'Galeria'),
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.history), label: 'Histórico'),
     ];
 
     return BottomNavigationBar(
