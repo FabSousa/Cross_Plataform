@@ -11,6 +11,7 @@ class PhotoModel {
   List<Nutrientes>? deficienciaNutrientes;
   List<PragasDoencas>? pragasDoencas;
   NivelDeAgua nivelDeAgua;
+  DateTime data;
 
   PhotoModel({
     required this.id,
@@ -19,5 +20,6 @@ class PhotoModel {
     this.deficienciaNutrientes,
     this.pragasDoencas,
     required this.nivelDeAgua,
+    required this.data,
   });
 }

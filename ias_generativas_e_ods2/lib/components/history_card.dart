@@ -24,7 +24,6 @@ class HistoryCard extends StatelessWidget {
       },
       child: Container(
         decoration: const BoxDecoration(
-          // color: Colors.lightGreen,
           border: Border(
             right: BorderSide(
               width: 10,
@@ -45,6 +44,18 @@ class HistoryCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Row(
+                    children: [
+                      const Text(
+                        "Data: ",
+                        style: textStyle,
+                      ),
+                      Text(
+                        "${photo.data.day.toString()}/${photo.data.month}/${photo.data.year}",
+                        style: textStyle,
+                      )
+                    ],
+                  ),
                   Row(
                     children: [
                       const Text(

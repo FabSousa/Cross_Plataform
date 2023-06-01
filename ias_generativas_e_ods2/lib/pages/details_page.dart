@@ -45,6 +45,23 @@ class DetailsPage extends StatelessWidget {
               title: Row(
                 children: [
                   const Text(
+                    "Data: ",
+                    style: textStyle,
+                  ),
+                  Text(
+                    "${photo.data.day.toString()}/${photo.data.month}/${photo.data.year}",
+                    style: textStyle,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            color: backgroundColor,
+            child: ListTile(
+              title: Row(
+                children: [
+                  const Text(
                     "Cultura: ",
                     style: textStyle,
                   ),

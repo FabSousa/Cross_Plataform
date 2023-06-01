@@ -13,32 +13,14 @@ class PhotoRepository {
         image: Image.network("https://picsum.photos/512/512"),
         cultura: Culturas.arroz,
         nivelDeAgua: NivelDeAgua.medio,
-      ),
-      PhotoModel(
-        id: 157894458789,
-        image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.cafe,
-        nivelDeAgua: NivelDeAgua.alto,
-        deficienciaNutrientes: List.empty(),
-      ),
-      PhotoModel(
-        id: 157894458789,
-        image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.soja,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
+        data: DateTime.utc(2023, 05, 30),
       ),
       PhotoModel(
         id: 157894458789,
         image: Image.network("https://picsum.photos/512/512"),
         cultura: Culturas.milho,
         nivelDeAgua: NivelDeAgua.excessivo,
+        data: DateTime.utc(2023, 05, 28),
         deficienciaNutrientes: [
           Nutrientes.calcio,
           Nutrientes.enxofre,
@@ -53,166 +35,32 @@ class PhotoRepository {
         ],
       ),
       PhotoModel(
-        id: 157894458789,
+        id: 195515435616,
         image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
+        cultura: Culturas.arroz,
+        nivelDeAgua: NivelDeAgua.medio,
+        data: DateTime.utc(2023, 05, 15),
       ),
       PhotoModel(
-        id: 157894458789,
+        id: 195515435616,
         image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
+        cultura: Culturas.arroz,
+        nivelDeAgua: NivelDeAgua.medio,
+        data: DateTime.utc(2023, 05, 20),
       ),
       PhotoModel(
-        id: 157894458789,
+        id: 195515435616,
         image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
+        cultura: Culturas.arroz,
+        nivelDeAgua: NivelDeAgua.medio,
+        data: DateTime.utc(2023, 05, 10),
       ),
       PhotoModel(
-        id: 157894458789,
+        id: 195515435616,
         image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
-      ),
-      PhotoModel(
-        id: 157894458789,
-        image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
-      ),
-      PhotoModel(
-        id: 157894458789,
-        image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
-      ),
-      PhotoModel(
-        id: 157894458789,
-        image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
-      ),
-      PhotoModel(
-        id: 157894458789,
-        image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
-      ),
-      PhotoModel(
-        id: 157894458789,
-        image: Image.network("https://picsum.photos/512/512"),
-        cultura: Culturas.milho,
-        nivelDeAgua: NivelDeAgua.excessivo,
-        deficienciaNutrientes: [
-          Nutrientes.calcio,
-          Nutrientes.enxofre,
-          Nutrientes.fosforo
-        ],
-        pragasDoencas: [
-          PragasDoencas.bacterias,
-          PragasDoencas.ervasDaninhas,
-          PragasDoencas.fungos,
-          PragasDoencas.lagartas,
-          PragasDoencas.virus,
-        ],
+        cultura: Culturas.arroz,
+        nivelDeAgua: NivelDeAgua.medio,
+        data: DateTime.utc(2023, 05, 31),
       ),
     ];
   }

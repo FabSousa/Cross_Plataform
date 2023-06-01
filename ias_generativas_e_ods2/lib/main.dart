@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ias_generativas_e_ods2/pages/details_page.dart';
+import 'package:ias_generativas_e_ods2/pages/filter_page.dart';
+import 'package:ias_generativas_e_ods2/pages/history_page.dart';
 import 'pages/home_page.dart';
 
 void main() {
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
       routes: {
         HomePage.routeName: (context) => const HomePage(),
         DetailsPage.routeName: (context) => const DetailsPage(),
+        HistoryPage.routeName: (context) => const HistoryPage(),
+        FilterPage.routeName: (context) => const FilterPage(),
       },
     );
   }
