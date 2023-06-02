@@ -70,11 +70,18 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: filtredPhotos.length,
-        itemBuilder: (context, index) =>
-            HistoryCard(photo: filtredPhotos[index]),
-      ),
+      body: filtredPhotos.isEmpty
+          ? const Center(
+              child: Text(
+                "Nenhum resultado encontrado",
+                style: TextStyle(fontSize: 25),
+              ),
+            )
+          : ListView.builder(
+              itemCount: filtredPhotos.length,
+              itemBuilder: (context, index) =>
+                  HistoryCard(photo: filtredPhotos[index]),
+            ),
     );
   }
 }
