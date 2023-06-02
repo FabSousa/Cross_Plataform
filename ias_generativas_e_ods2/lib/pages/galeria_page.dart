@@ -6,6 +6,8 @@ import 'package:ias_generativas_e_ods2/repository/photo_repository.dart';
 class GaleryPage extends StatefulWidget {
   const GaleryPage({super.key});
 
+  static const routeName = "/galery";
+
   @override
   State<GaleryPage> createState() => _GaleryPageState();
 }

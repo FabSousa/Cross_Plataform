@@ -38,14 +38,14 @@ class PhotoRepository {
         id: 195515435616,
         image: Image.network("https://picsum.photos/512/512"),
         cultura: Culturas.arroz,
-        nivelDeAgua: NivelDeAgua.medio,
+        nivelDeAgua: NivelDeAgua.excessivo,
         data: DateTime.utc(2023, 05, 15),
       ),
       PhotoModel(
         id: 195515435616,
         image: Image.network("https://picsum.photos/512/512"),
         cultura: Culturas.arroz,
-        nivelDeAgua: NivelDeAgua.medio,
+        nivelDeAgua: NivelDeAgua.critico,
         data: DateTime.utc(2023, 05, 20),
       ),
       PhotoModel(

@@ -164,7 +164,7 @@ class _FilterPageState extends State<FilterPage> {
       bottomNavigationBar: BottomAppBar(
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(
+            Navigator.popAndPushNamed(
               context,
               HistoryPage.routeName,
               arguments: filters,
