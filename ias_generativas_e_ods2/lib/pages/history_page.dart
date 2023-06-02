@@ -23,9 +23,37 @@ class _HistoryPageState extends State<HistoryPage> {
     final filters =
         ModalRoute.of(context)!.settings.arguments as Map<Filtros, Object?>?;
 
+    List<PhotoModel> filtredPhotos = List.empty(growable: true);
+
     photos.sort(
-      (a, b) => a.data.compareTo(b.data),
+      (a, b) => b.data.compareTo(a.data),
     );
+
+    for (var photo in photos) {
+      if (filters == null) {
+        filtredPhotos = photos;
+        break;
+      }
+
+      bool culturaCheck = filters[Filtros.cultura] == null ||
+          filters[Filtros.cultura] == photo.cultura;
+
+      bool aguaCheck = filters[Filtros.agua] == null ||
+          filters[Filtros.agua] == photo.nivelDeAgua;
+
+      bool nutrientesCheck = filters[Filtros.nutrientes] == null ||
+          photo.deficienciaNutrientes != null &&
+              photo.deficienciaNutrientes!
+                  .contains(filters[Filtros.nutrientes]);
+
+      bool pragasCheck = filters[Filtros.pragas] == null ||
+          photo.pragasDoencas != null &&
+              photo.pragasDoencas!.contains(filters[Filtros.pragas]);
+
+      if (culturaCheck && aguaCheck && nutrientesCheck && pragasCheck) {
+        filtredPhotos.add(photo);
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -43,29 +71,9 @@ class _HistoryPageState extends State<HistoryPage> {
         ],
       ),
       body: ListView.builder(
-        itemCount: photos.length,
-        itemBuilder: (context, index) {
-          PhotoModel photo = photos[index];
-
-          if (filters == null) return HistoryCard(photo: photo);
-
-          bool culturaCheck = filters[Filtros.cultura] == null ||
-              filters[Filtros.cultura] == photo.cultura;
-
-          bool aguaCheck = filters[Filtros.agua] == null ||
-              filters[Filtros.cultura] == photo.nivelDeAgua;
-
-          bool nutrientesCheck = filters[Filtros.nutrientes] == null ||
-              filters[Filtros.cultura] == photo.deficienciaNutrientes;
-
-          bool pragasCheck = filters[Filtros.pragas] == null ||
-              filters[Filtros.cultura] == photo.pragasDoencas;
-
-          if (culturaCheck && aguaCheck && nutrientesCheck && pragasCheck) {
-            return HistoryCard(photo: photo);
-          }
-          return null;
-        },
+        itemCount: filtredPhotos.length,
+        itemBuilder: (context, index) =>
+            HistoryCard(photo: filtredPhotos[index]),
       ),
     );
   }

@@ -19,7 +19,7 @@ class _FilterPageState extends State<FilterPage> {
   @override
   Widget build(BuildContext context) {
     Map<Filtros, Object?> filters = {
-      Filtros.cultura: Null,
+      Filtros.cultura: null,
       Filtros.agua: null,
       Filtros.nutrientes: null,
       Filtros.pragas: null,
