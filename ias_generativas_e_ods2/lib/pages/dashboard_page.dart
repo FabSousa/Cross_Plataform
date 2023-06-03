@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ias_generativas_e_ods2/components/drone_card.dart';
+import 'package:ias_generativas_e_ods2/components/nav_bar.dart';
 import 'package:ias_generativas_e_ods2/components/photo_card.dart';
 import 'package:ias_generativas_e_ods2/enum/nivel_de_agua.dart';
 import 'package:ias_generativas_e_ods2/models/drone_model.dart';
@@ -88,6 +89,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ],
       ),
+      bottomNavigationBar: const NavBar(index: 0),
     );
   }
 

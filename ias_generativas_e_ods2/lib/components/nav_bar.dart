@@ -3,38 +3,13 @@ import 'package:ias_generativas_e_ods2/pages/dashboard_page.dart';
 import 'package:ias_generativas_e_ods2/pages/galeria_page.dart';
 import 'package:ias_generativas_e_ods2/pages/history_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class NavBar extends StatelessWidget {
+  final int index;
 
-  static const routeName = "/";
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  var index = 0;
+  const NavBar({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: getBody(),
-      bottomNavigationBar: getBottomNavigationBar(),
-    );
-  }
-
-  Widget getBody() {
-    return IndexedStack(
-      index: index,
-      children: const [
-        DashboardPage(),
-        GaleryPage(),
-        HistoryPage(),
-      ],
-    );
-  }
-
-  Widget getBottomNavigationBar() {
     final items = [
       const BottomNavigationBarItem(
           icon: Icon(Icons.dashboard_outlined), label: 'Dashboard'),
@@ -49,9 +24,13 @@ class _HomePageState extends State<HomePage> {
       items: items,
       type: BottomNavigationBarType.fixed,
       onTap: (index) {
-        setState(() {
-          this.index = index;
-        });
+        List<String> routeNames = List.of([
+          DashboardPage.routeName,
+          GaleryPage.routeName,
+          HistoryPage.routeName,
+        ]);
+
+        Navigator.popAndPushNamed(context, routeNames[index]);
       },
     );
   }

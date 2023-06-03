@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ias_generativas_e_ods2/components/nav_bar.dart';
 import 'package:ias_generativas_e_ods2/components/photo_card.dart';
 import 'package:ias_generativas_e_ods2/models/photo_model.dart';
 import 'package:ias_generativas_e_ods2/repository/photo_repository.dart';
@@ -34,6 +35,7 @@ class _GaleryPageState extends State<GaleryPage> {
         childAspectRatio: 1,
         children: photoCards,
       ),
+      bottomNavigationBar: const NavBar(index: 1),
     );
   }
 }

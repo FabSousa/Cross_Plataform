@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ias_generativas_e_ods2/components/history_card.dart';
+import 'package:ias_generativas_e_ods2/components/nav_bar.dart';
 import 'package:ias_generativas_e_ods2/enum/filtros.dart';
 import 'package:ias_generativas_e_ods2/models/photo_model.dart';
 import 'package:ias_generativas_e_ods2/pages/filter_page.dart';
@@ -61,7 +62,7 @@ class _HistoryPageState extends State<HistoryPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(
+              Navigator.popAndPushNamed(
                 context,
                 FilterPage.routeName,
               );
@@ -82,6 +83,7 @@ class _HistoryPageState extends State<HistoryPage> {
               itemBuilder: (context, index) =>
                   HistoryCard(photo: filtredPhotos[index]),
             ),
+      bottomNavigationBar: const NavBar(index: 2),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:ias_generativas_e_ods2/pages/details_page.dart';
 import 'package:ias_generativas_e_ods2/pages/filter_page.dart';
 import 'package:ias_generativas_e_ods2/pages/galeria_page.dart';
 import 'package:ias_generativas_e_ods2/pages/history_page.dart';
-import 'pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,20 +15,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "IAs Generativas e ODS2",
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      initialRoute: HomePage.routeName,
-      routes: {
-        HomePage.routeName: (context) => const HomePage(),
-        DashboardPage.routeName: (context) => const DashboardPage(),
-        GaleryPage.routeName: (context) => const GaleryPage(),
-        HistoryPage.routeName: (context) => const HistoryPage(),
-        FilterPage.routeName: (context) => const FilterPage(),
-        DetailsPage.routeName: (context) => const DetailsPage(),
-      },
-    );
+        debugShowCheckedModeBanner: false,
+        title: "IAs Generativas e ODS2",
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        initialRoute: DashboardPage.routeName,
+        routes: {
+          DashboardPage.routeName: (context) => const DashboardPage(),
+          GaleryPage.routeName: (context) => const GaleryPage(),
+          HistoryPage.routeName: (context) => const HistoryPage(),
+          FilterPage.routeName: (context) => const FilterPage(),
+          DetailsPage.routeName: (context) => const DetailsPage(),
+        });
   }
 }
