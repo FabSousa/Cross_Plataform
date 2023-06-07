@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ias_generativas_e_ods2/models/photo_model.dart';
+import 'package:ias_generativas_e_ods2/pages/recomendations_page.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key});
@@ -12,9 +13,24 @@ class DetailsPage extends StatelessWidget {
     const backgroundColor = Colors.green;
     const textStyle = TextStyle(color: Colors.white, fontSize: 20);
 
+    photo.deficienciaNutrientes ??= List.empty();
+    photo.pragasDoencas ??= List.empty();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Detalhes"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                RecomendationsPage.routeName,
+                arguments: photo,
+              );
+            },
+            icon: const Icon(Icons.assignment),
+          ),
+        ],
       ),
       body: ListView(
         children: [
@@ -93,56 +109,31 @@ class DetailsPage extends StatelessWidget {
           Container(
             color: backgroundColor,
             child: ListTile(
-              title: photo.deficienciaNutrientes == null ||
-                      photo.deficienciaNutrientes!.isEmpty
-                  ? const Text(
-                      "Sem deficiencia nutrientes",
-                      style: textStyle,
-                    )
-                  : Row(
-                      children: [
-                        const Text(
-                          "Nutrienteas em falta: ",
-                          style: textStyle,
-                        ),
-                        Column(
-                          children: List.generate(
-                            photo.deficienciaNutrientes!.length,
-                            (index) => Text(
-                              photo.deficienciaNutrientes![index].name,
-                              style: textStyle,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+              title: Row(
+                children: [
+                  const Text(
+                    "Nutrienteas em falta: ",
+                    style: textStyle,
+                  ),
+                  Text(photo.deficienciaNutrientes!.length.toString(),
+                      style: textStyle),
+                ],
+              ),
             ),
           ),
           Container(
             color: backgroundColor,
             child: ListTile(
-              title: photo.pragasDoencas == null || photo.pragasDoencas!.isEmpty
-                  ? const Text(
-                      "Sem pragas e doenças",
-                      style: textStyle,
-                    )
-                  : Row(
-                      children: [
-                        const Text(
-                          "Pragas e doenças: ",
-                          style: textStyle,
-                        ),
-                        Column(
-                          children: List.generate(
-                            photo.pragasDoencas!.length,
-                            (index) => Text(
-                              photo.pragasDoencas![index].name,
-                              style: textStyle,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+              title: Row(
+                children: [
+                  const Text(
+                    "Pragas e doenças: ",
+                    style: textStyle,
+                  ),
+                  Text(photo.pragasDoencas!.length.toString(),
+                      style: textStyle),
+                ],
+              ),
             ),
           ),
         ],

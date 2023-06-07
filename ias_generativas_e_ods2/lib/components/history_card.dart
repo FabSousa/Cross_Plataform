@@ -37,6 +37,7 @@ class HistoryCard extends StatelessWidget {
           children: [
             SizedBox(
               width: 100,
+              height: 100,
               child: photo.image,
             ),
             SizedBox(

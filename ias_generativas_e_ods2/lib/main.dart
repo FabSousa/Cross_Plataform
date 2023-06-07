@@ -4,6 +4,7 @@ import 'package:ias_generativas_e_ods2/pages/details_page.dart';
 import 'package:ias_generativas_e_ods2/pages/filter_page.dart';
 import 'package:ias_generativas_e_ods2/pages/galeria_page.dart';
 import 'package:ias_generativas_e_ods2/pages/history_page.dart';
+import 'package:ias_generativas_e_ods2/pages/recomendations_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           HistoryPage.routeName: (context) => const HistoryPage(),
           FilterPage.routeName: (context) => const FilterPage(),
           DetailsPage.routeName: (context) => const DetailsPage(),
+          RecomendationsPage.routeName: (context) => const RecomendationsPage(),
         });
   }
 }

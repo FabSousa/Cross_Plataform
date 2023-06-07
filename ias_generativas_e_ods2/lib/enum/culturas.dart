@@ -1,7 +1,6 @@
 enum Culturas {
   soja,
   milho,
+  trigo,
   cafe,
-  feijao,
-  arroz,
 }

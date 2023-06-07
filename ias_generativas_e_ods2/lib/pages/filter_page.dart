@@ -52,12 +52,8 @@ class _FilterPageState extends State<FilterPage> {
                   label: Culturas.cafe.name,
                 ),
                 DropdownMenuEntry(
-                  value: Culturas.feijao,
-                  label: Culturas.feijao.name,
-                ),
-                DropdownMenuEntry(
-                  value: Culturas.arroz,
-                  label: Culturas.arroz.name,
+                  value: Culturas.trigo,
+                  label: Culturas.trigo.name,
                 ),
               ],
             ),
@@ -139,10 +135,6 @@ class _FilterPageState extends State<FilterPage> {
                 DropdownMenuEntry(
                   value: PragasDoencas.bacterias,
                   label: PragasDoencas.bacterias.name,
-                ),
-                DropdownMenuEntry(
-                  value: PragasDoencas.ervasDaninhas,
-                  label: PragasDoencas.ervasDaninhas.name,
                 ),
                 DropdownMenuEntry(
                   value: PragasDoencas.fungos,
