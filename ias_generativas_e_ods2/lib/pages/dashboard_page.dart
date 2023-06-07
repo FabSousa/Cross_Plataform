@@ -47,7 +47,7 @@ class _DashboardPageState extends State<DashboardPage> {
             margin: const EdgeInsets.only(left: 15),
             alignment: Alignment.centerLeft,
             child: const Text(
-              "Dones operantes",
+              "Drones operantes",
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ),
