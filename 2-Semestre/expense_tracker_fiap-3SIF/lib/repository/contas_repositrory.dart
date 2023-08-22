@@ -1,7 +1,8 @@
 import '../models/conta.dart';
 
 class ContasRepository {
-  List<Conta> listarContas() {
+  Future<List<Conta>> listarContas() async {
+    await Future.delayed(const Duration(seconds: 5));
     return [
       Conta(
         id: '1',

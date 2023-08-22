@@ -5,7 +5,8 @@ import '../models/categoria.dart';
 import '../models/tipo_transacao.dart';
 
 class CategoriaRepository {
-  List<Categoria> listarCategorias() {
+  Future<List<Categoria>> listarCategorias() async {
+    await Future.delayed(const Duration(seconds: 5));
     return [
       Categoria(
         id: 1,
