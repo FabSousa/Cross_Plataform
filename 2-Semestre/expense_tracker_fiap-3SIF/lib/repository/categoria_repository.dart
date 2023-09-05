@@ -5,9 +5,10 @@ import '../models/categoria.dart';
 import '../models/tipo_transacao.dart';
 
 class CategoriaRepository {
-  Future<List<Categoria>> listarCategorias() async {
+  Future<List<Categoria>> listarCategorias(
+      {TipoTransacao? tipoTransacao}) async {
     await Future.delayed(const Duration(seconds: 5));
-    return [
+    final categorias = [
       Categoria(
         id: 1,
         descricao: 'Casa',
@@ -72,5 +73,10 @@ class CategoriaRepository {
         tipoTransacao: TipoTransacao.receita,
       ),
     ];
+
+    return categorias
+        .where((categoria) =>
+            tipoTransacao == null || categoria.tipoTransacao == tipoTransacao)
+        .toList();
   }
 }

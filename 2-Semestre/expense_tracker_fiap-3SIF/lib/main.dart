@@ -1,4 +1,5 @@
 import 'package:expense_tracker/pages/home_page.dart';
+import 'package:expense_tracker/pages/transacao_cadastro.dart';
 import 'package:expense_tracker/pages/transacao_detalhes_page.dart';
 
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const HomePage(),
         "/transacao-detalhes": (context) => const TransacaoDetalhesPage(),
+        "/transacao-cadastro":(context) => const TransacaoCadastro(),
       },
       initialRoute: "/",
     );
