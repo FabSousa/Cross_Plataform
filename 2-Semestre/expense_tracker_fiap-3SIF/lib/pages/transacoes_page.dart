@@ -101,7 +101,7 @@ class _TransacoesPageState extends State<TransacoesPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, "/transacao-cadastro");
+          Navigator.pushNamed(context, '/transacao-cadastro');
         },
         child: const Icon(Icons.add),
       ),
