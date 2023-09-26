@@ -1,4 +1,3 @@
-// import 2
 import 'package:expense_tracker/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +9,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _senhaController = TextEditingController();
-  var _ocultarSenha = true;
+  final _key = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
+  final senhaController = TextEditingController();
+
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +22,10 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
-          padding: const EdgeInsets.all(16.2),
-          child: Center(
-            child: Form(
-              key: _formKey,
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _key,
+            child: Center(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -59,16 +60,13 @@ class _LoginPageState extends State<LoginPage> {
 
   TextFormField _buildEmail() {
     return TextFormField(
-      controller: _emailController,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'O campo email é obrigatório';
+      controller: emailController,
+      validator: (String? email) {
+        if (email == null || email.isEmpty) {
+          return "Por favor, digite seu e-mail";
+        } else if (!validarEmail(email)) {
+          return "Por favor, digite um e-mail válido";
         }
-
-        if (!validarEmail(value)) {
-          return 'Email inválido';
-        }
-
         return null;
       },
       decoration: const InputDecoration(
@@ -81,30 +79,29 @@ class _LoginPageState extends State<LoginPage> {
 
   TextFormField _buildSenha() {
     return TextFormField(
-      controller: _senhaController,
-      validator: (value) {
-        if (value == null || value.length < 5) {
-          return 'A senha deve conter no mínino 5 caracteres';
-        }
-        if (value.length > 12) {
-          return 'A senha não pode ter mais que 12 caracteres';
+      controller: senhaController,
+      validator: (senha) {
+        if (senha == null || senha.isEmpty) {
+          return "Por favor, digite sua senha";
+        } else if (senha.length < 6) {
+          return "A senha deve ter pelo menos 6 caracteres";
         }
         return null;
       },
-      obscureText: _ocultarSenha,
+      obscureText: obscureText,
       decoration: InputDecoration(
-        border: const OutlineInputBorder(),
+        border: OutlineInputBorder(),
         hintText: "Digite sua senha",
-        prefixIcon: const Icon(Icons.lock_outline_rounded),
-        suffixIcon: GestureDetector(
-          onTap: () {
+        prefixIcon: Icon(Icons.lock_outline_rounded),
+        suffixIcon: IconButton(
+          icon: obscureText
+              ? Icon(Icons.visibility_outlined)
+              : Icon(Icons.visibility_off_outlined),
+          onPressed: () {
             setState(() {
-              _ocultarSenha = !_ocultarSenha;
+              obscureText = !obscureText;
             });
           },
-          child: _ocultarSenha
-              ? const Icon(Icons.visibility_outlined)
-              : const Icon(Icons.visibility_off_outlined),
         ),
       ),
     );
@@ -116,11 +113,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          final isValid = _formKey.currentState!.validate();
-
-          if (isValid) {
-            onTapBtnSignUp(_emailController.text, _senhaController.text);
-          }
+          onTapBtnSignUp();
         },
         child: const Text('Login'),
       ),
@@ -171,16 +164,16 @@ class _LoginPageState extends State<LoginPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 
-  void onTapBtnSignUp(String email, String senha) {
-    final auth = AuthRepository().login(email, senha);
-    auth.then((value) {
-      if (value) {
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        _exibirMensagem('Email ou senha incorretos');
-      }
-    }).catchError((value) {
-      _exibirMensagem('Erro ao logar, tente novamente mais tarde');
-    });
+  void onTapBtnSignUp() {
+    if (_key.currentState!.validate()) {
+      final repo = AuthRepository();
+      repo.login(emailController.text, senhaController.text).then((value) {
+        if (value) {
+          Navigator.pushReplacementNamed(context, "/home");
+        } else {
+          _exibirMensagem("E-mail ou senha inválidos");
+        }
+      });
+    }
   }
 }

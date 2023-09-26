@@ -37,6 +37,7 @@ dependencies:
   ionicons: ^0.2.2
   intl: ^0.18.1
   flutter_masked_text2: ^0.9.1
+  supabase_flutter: ^1.10.19
 
 dev_dependencies:
   flutter_test:

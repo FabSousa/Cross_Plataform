@@ -1,3 +1,4 @@
+import 'package:expense_tracker/pages/conta_cadastro_page.dart';
 import 'package:expense_tracker/pages/home_page.dart';
 import 'package:expense_tracker/pages/login_page.dart';
 import 'package:expense_tracker/pages/registar_page.dart';
@@ -24,11 +25,12 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        "/": (context) => const LoginPage(),
+        "/": (context) => const HomePage(),
+        "/login": (context) => const LoginPage(),
         "/registrar": (context) => const RegistrarPage(),
-        "/home": (context) => const HomePage(),
         "/transacao-detalhes": (context) => const TransacaoDetalhesPage(),
         "/transacao-cadastro": (context) => const TransacaoCadastroPage(),
+        "/conta-cadastro": (context) => const ContaCadastroPage(),
       },
       initialRoute: "/",
     );

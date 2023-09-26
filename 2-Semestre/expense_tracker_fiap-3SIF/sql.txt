@@ -1,0 +1,79 @@
+create table categorias (
+  id bigint generated always as identity primary key,
+  descricao text not null,
+  tipo_transacao integer not null,
+  icone integer not null,
+  cor integer not null,
+  ativo boolean default true
+);
+
+INSERT INTO categorias
+    (descricao, tipo_transacao, icone, cor)
+VALUES
+    ('Casa', 1, 60541, 4284955319),
+    ('Alimentação', 1, 60394, 4294198070),
+    ('Lazer', 1, 60463, 4294940672),
+    ('Educação', 1, 60070, 4282339765),
+    ('Animais de estimação', 1, 60820, 4286141768),
+    ('Transporte', 1, 60100, 4280391411),
+    ('Salário', 0, 60166, 4283215696),
+    ('Empréstimo', 0, 60136, 4278238420),
+    ('Vendas', 0, 61216, 4283215696);
+
+________________________________________________________________________________________
+
+
+create table
+  transacoes (
+    id bigint generated always as identity primary key,
+    categoria_id bigint references categorias (id),
+    conta_id bigint references contas (id),
+    descricao text not null,
+    tipo_transacao integer not null,
+    valor numeric not null,
+    data_transacao date not null,
+    detalhes text,
+    ativo boolean default true
+  );
+
+
+  insert into
+  transacoes (
+    descricao,
+    tipo_transacao,
+    valor,
+    data_transacao,
+    categoria_id,
+    conta_id
+  )
+values
+  ('Mercado', 1, 100.0, now(), 2, 1), ('Salário', 0, 2000.0, now(), 7, 1);
+
+
+________________________________________________________________________________________
+
+
+  create table contas (
+  id bigint generated always as identity primary key,
+  descricao text not null,
+  tipo_conta integer not null,
+  banco text,
+  ativo boolean default true
+);
+
+
+insert into contas 
+    (descricao, tipo_conta, banco)
+values 
+  (
+    'Conta Corrente', 0, 'bb'
+  ),
+  (
+    'Conta Investimento', 2, 'itau'
+  );
+
+
+
+_______________________________________________________________________________________________
+
+

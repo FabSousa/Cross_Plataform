@@ -2,10 +2,14 @@ import 'package:expense_tracker/components/categoria_select.dart';
 import 'package:expense_tracker/models/categoria.dart';
 import 'package:expense_tracker/models/tipo_transacao.dart';
 import 'package:expense_tracker/pages/categorias_select_page.dart';
+import 'package:expense_tracker/pages/contas_select_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+
+import '../components/conta_select.dart';
+import '../models/conta.dart';
 
 class TransacaoCadastroPage extends StatefulWidget {
   const TransacaoCadastroPage({super.key});
@@ -28,6 +32,7 @@ class _TransacaoCadastroPageState extends State<TransacaoCadastroPage> {
   TipoTransacao tipoTransacaoSelecionada = TipoTransacao.receita;
 
   Categoria? categoriaSelecionada;
+  Conta? contaSelecionada;
 
   @override
   Widget build(BuildContext context) {
@@ -47,30 +52,15 @@ class _TransacaoCadastroPageState extends State<TransacaoCadastroPage> {
                 const SizedBox(height: 30),
                 _buildTipoTransacao(),
                 const SizedBox(height: 30),
-                CategoriaSelect(
-                  categoria: categoriaSelecionada,
-                  onTap: () async {
-                    final result = await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => CategoriesSelectPage(
-                          tipoTransacao: tipoTransacaoSelecionada,
-                        ),
-                      ),
-                    ) as Categoria?;
-
-                    if (result != null) {
-                      setState(() {
-                        categoriaSelecionada = result;
-                      });
-                    }
-                  },
-                ),
+                _buildCategoriaSelect(),
+                const SizedBox(height: 30),
+                _buildContaSelect(),
                 const SizedBox(height: 30),
                 _buildValor(),
                 const SizedBox(height: 30),
-                _buildDetalhes(),
-                const SizedBox(height: 30),
                 _buildData(),
+                const SizedBox(height: 30),
+                _buildObservacao(),
                 const SizedBox(height: 30),
                 _buildButton(),
               ],
@@ -78,6 +68,46 @@ class _TransacaoCadastroPageState extends State<TransacaoCadastroPage> {
           ),
         ),
       ),
+    );
+  }
+
+  CategoriaSelect _buildCategoriaSelect() {
+    return CategoriaSelect(
+      categoria: categoriaSelecionada,
+      onTap: () async {
+        final result = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CategoriesSelectPage(
+              tipoTransacao: tipoTransacaoSelecionada,
+            ),
+          ),
+        ) as Categoria?;
+
+        if (result != null) {
+          setState(() {
+            categoriaSelecionada = result;
+          });
+        }
+      },
+    );
+  }
+
+  ContaSelect _buildContaSelect() {
+    return ContaSelect(
+      conta: contaSelecionada,
+      onTap: () async {
+        final result = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const ContasSelectPage(),
+          ),
+        ) as Conta?;
+
+        if (result != null) {
+          setState(() {
+            contaSelecionada = result;
+          });
+        }
+      },
     );
   }
 
@@ -175,7 +205,7 @@ class _TransacaoCadastroPageState extends State<TransacaoCadastroPage> {
     );
   }
 
-  TextFormField _buildDetalhes() {
+  TextFormField _buildObservacao() {
     return TextFormField(
       controller: detalhesController,
       decoration: const InputDecoration(

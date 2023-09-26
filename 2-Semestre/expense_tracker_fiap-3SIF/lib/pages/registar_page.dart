@@ -1,4 +1,4 @@
-// import 2
+import 'package:expense_tracker/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 
 class RegistrarPage extends StatefulWidget {
@@ -9,30 +9,38 @@ class RegistrarPage extends StatefulWidget {
 }
 
 class _RegistrarPageState extends State<RegistrarPage> {
+  final _key = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final senhaController = TextEditingController();
+  final confirmarSenhaController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
-          padding: const EdgeInsets.all(16.2),
-          child: Center(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildBemVindo(),
-                  const SizedBox(height: 20),
-                  _buildEmail(),
-                  const SizedBox(height: 20),
-                  _buildSenha(),
-                  const SizedBox(height: 20),
-                  _buildConfirmarSenha(),
-                  const SizedBox(height: 10),
-                  _buildButton(),
-                  const SizedBox(height: 10),
-                  _buildRegistrar(),
-                ]),
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _key,
+            child: Center(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildBemVindo(),
+                    const SizedBox(height: 20),
+                    _buildEmail(),
+                    const SizedBox(height: 20),
+                    _buildSenha(),
+                    const SizedBox(height: 20),
+                    _buildConfirmarSenha(),
+                    const SizedBox(height: 10),
+                    _buildButton(),
+                    const SizedBox(height: 10),
+                    _buildRegistrar(),
+                  ]),
+            ),
           ),
         ),
       ),
@@ -52,6 +60,15 @@ class _RegistrarPageState extends State<RegistrarPage> {
 
   TextFormField _buildEmail() {
     return TextFormField(
+      controller: emailController,
+      validator: (String? email) {
+        if (email == null || email.isEmpty) {
+          return "Por favor, digite seu e-mail";
+        } else if (!validarEmail(email)) {
+          return "Por favor, digite um e-mail válido";
+        }
+        return null;
+      },
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         hintText: "Digite seu e-mail",
@@ -62,6 +79,15 @@ class _RegistrarPageState extends State<RegistrarPage> {
 
   TextFormField _buildSenha() {
     return TextFormField(
+      controller: senhaController,
+      validator: (senha) {
+        if (senha == null || senha.isEmpty) {
+          return "Por favor, digite sua senha";
+        } else if (senha.length < 6) {
+          return "A senha deve ter pelo menos 6 caracteres";
+        }
+        return null;
+      },
       obscureText: true,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
@@ -75,6 +101,15 @@ class _RegistrarPageState extends State<RegistrarPage> {
 
   TextFormField _buildConfirmarSenha() {
     return TextFormField(
+      controller: confirmarSenhaController,
+      validator: (senha) {
+        if (senha == null || senha.isEmpty) {
+          return "Por favor, digite sua senha";
+        }
+        if (senha != senhaController.text) {
+          return "As senhas não coincidem";
+        }
+      },
       obscureText: true,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
@@ -101,7 +136,7 @@ class _RegistrarPageState extends State<RegistrarPage> {
   Widget _buildRegistrar() {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacementNamed(context, "/");
+        Navigator.pushReplacementNamed(context, "/login");
       },
       child: RichText(
           text: TextSpan(children: <InlineSpan>[
@@ -142,5 +177,20 @@ class _RegistrarPageState extends State<RegistrarPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 
-  void onTapBtnSignUp() {}
+  void onTapBtnSignUp() {
+    if (_key.currentState!.validate()) {
+      final repo = AuthRepository();
+      repo
+          .registrar(emailController.text, senhaController.text)
+          .then((sucesso) {
+        if (sucesso) {
+          Navigator.pushReplacementNamed(context, "/home");
+        } else {
+          _exibirMensagem("E-mail já cadastrado");
+        }
+      }).catchError((e) {
+        _exibirMensagem(e.toString());
+      });
+    }
+  }
 }

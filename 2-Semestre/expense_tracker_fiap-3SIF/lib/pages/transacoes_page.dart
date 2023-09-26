@@ -100,6 +100,7 @@ class _TransacoesPageState extends State<TransacoesPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "transacao-cadastro",
         onPressed: () {
           Navigator.pushNamed(context, '/transacao-cadastro');
         },
