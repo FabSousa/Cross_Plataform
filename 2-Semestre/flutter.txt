@@ -1,0 +1,31 @@
+https://pitch.com/public/3038d25f-4820-4c0a-809f-316428c7a477
+
+https://github.com/dcvieira/cart_provider_demo/tree/set-state
+
+
+
+
+Com base no aplicativo "expense_tracker" desenvolvido durante as aulas, é hora de adicionar uma funcionalidade que acrescente valor à solução, contribuindo para o controle eficaz das finanças pessoais.
+
+A nova funcionalidade deve estar alinhada com o tema proposto e atender aos seguintes requisitos:
+
+Criação de, no mínimo, uma nova tabela no banco de dados Supabase.
+Implementação de operações CRUD (Create, Read, Update e Delete).
+
+
+Critérios de Avaliação:
+
+Complexidade da Funcionalidade: Será valorizada a implementação de uma funcionalidade que vá além do básico, demonstrando habilidades avançadas no desenvolvimento Flutter.
+
+Organização do Código com Boas Práticas de Programação: Avaliaremos a estrutura do código, a clareza e a aderência às melhores práticas de programação. Certifique-se de seguir os padrões estabelecidos durante o curso.
+
+Design e Utilização de Novos Widgets: A estética e a eficiência do design, bem como a incorporação de novos widgets, serão fatores importantes na avaliação.
+
+Entrega:
+- poderá ser feito em dupla.
+- Entregar link do seu projeto no github (não será aceito arquivos com código fonte)
+- Pdf com explicação e prints e de todas as telas da funcionalidade. (projetos sem pdf serão zerados)
+- print do modelo de dados final do Supabase
+- Entrega pelo portal até 17/10
+
+https://github.com/dcvieira/expense_tracker_fiap/tree/supabase
