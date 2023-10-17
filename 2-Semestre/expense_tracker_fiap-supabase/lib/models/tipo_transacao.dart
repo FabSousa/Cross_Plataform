@@ -1,1 +1,0 @@
-enum TipoTransacao { receita, despesa }
