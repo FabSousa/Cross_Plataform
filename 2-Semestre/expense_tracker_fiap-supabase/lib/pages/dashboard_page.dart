@@ -1,3 +1,4 @@
+import 'package:expense_tracker/components/user_drawer.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -10,8 +11,11 @@ class DashBoardPage extends StatefulWidget {
 class _DashBoardPageState extends State<DashBoardPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('DashBoard Page'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Expense Tracker'),
+      ),
+      drawer: const UserDrawer(),
     );
   }
 }

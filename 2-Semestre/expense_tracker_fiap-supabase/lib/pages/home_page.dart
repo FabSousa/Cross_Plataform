@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:expense_tracker/pages/categorias_page.dart';
 import 'package:expense_tracker/pages/contas_page.dart';
 import 'package:expense_tracker/pages/dashboard_page.dart';
 import 'package:expense_tracker/pages/transacoes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +16,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  StreamSubscription<AuthState>? authSubscription;
   int pageIndex = 0;
+
+  @override
+  void initState() {
+    authSubscription =
+        Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      final AuthChangeEvent event = data.event;
+      if (event == AuthChangeEvent.signedOut) {
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,5 +77,11 @@ class _HomePageState extends State<HomePage> {
         });
       },
     );
+  }
+
+  @override
+  void dispose() {
+    authSubscription?.cancel();
+    super.dispose();
   }
 }

@@ -1,16 +1,8 @@
-import 'package:expense_tracker/components/categoria_select.dart';
-import 'package:expense_tracker/models/categoria.dart';
-import 'package:expense_tracker/models/tipo_transacao.dart';
 import 'package:expense_tracker/pages/bancos_select_page.dart';
-import 'package:expense_tracker/pages/categorias_select_page.dart';
-import 'package:expense_tracker/pages/contas_select_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../components/banco_select.dart';
-import '../components/conta_select.dart';
 import '../models/banco.dart';
 import '../models/conta.dart';
 
@@ -129,11 +121,7 @@ class _ContaCadastroPageState extends State<ContaCadastroPage> {
       child: ElevatedButton(
         onPressed: () {
           final isValid = _formKey.currentState!.validate();
-          if (isValid) {
-            final descricao = descricaoController.text;
-
-            print(descricao);
-          }
+          if (isValid) {}
         },
         child: const Text('Cadastrar'),
       ),

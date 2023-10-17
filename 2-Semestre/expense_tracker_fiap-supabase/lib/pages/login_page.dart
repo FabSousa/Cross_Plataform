@@ -1,18 +1,21 @@
 import 'package:expense_tracker/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class RegistrarPage extends StatefulWidget {
-  const RegistrarPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _RegistrarPageState createState() => _RegistrarPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegistrarPageState extends State<RegistrarPage> {
+class _LoginPageState extends State<LoginPage> {
   final _key = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
-  final confirmarSenhaController = TextEditingController();
+
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +36,6 @@ class _RegistrarPageState extends State<RegistrarPage> {
                     _buildEmail(),
                     const SizedBox(height: 20),
                     _buildSenha(),
-                    const SizedBox(height: 20),
-                    _buildConfirmarSenha(),
                     const SizedBox(height: 10),
                     _buildButton(),
                     const SizedBox(height: 10),
@@ -49,7 +50,7 @@ class _RegistrarPageState extends State<RegistrarPage> {
 
   Text _buildBemVindo() {
     return const Text(
-      "Registrar-se",
+      "Bem Vindo!",
       textAlign: TextAlign.center,
       style: TextStyle(
         fontWeight: FontWeight.bold,
@@ -88,34 +89,21 @@ class _RegistrarPageState extends State<RegistrarPage> {
         }
         return null;
       },
-      obscureText: true,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
         hintText: "Digite sua senha",
-        prefixIcon: Icon(Icons.lock_outline_rounded),
-        suffixIcon: Icon(Icons.visibility_outlined),
-      ),
-    );
-    // Icone para ocultar a senha visibility_off_outlined
-  }
-
-  TextFormField _buildConfirmarSenha() {
-    return TextFormField(
-      controller: confirmarSenhaController,
-      validator: (senha) {
-        if (senha == null || senha.isEmpty) {
-          return "Por favor, digite sua senha";
-        }
-        if (senha != senhaController.text) {
-          return "As senhas não coincidem";
-        }
-      },
-      obscureText: true,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: "Confirme sua senha",
-        prefixIcon: Icon(Icons.lock_outline_rounded),
-        suffixIcon: Icon(Icons.visibility_outlined),
+        prefixIcon: const Icon(Icons.lock_outline_rounded),
+        suffixIcon: IconButton(
+          icon: obscureText
+              ? const Icon(Icons.visibility_outlined)
+              : const Icon(Icons.visibility_off_outlined),
+          onPressed: () {
+            setState(() {
+              obscureText = !obscureText;
+            });
+          },
+        ),
       ),
     );
     // Icone para ocultar a senha visibility_off_outlined
@@ -128,7 +116,7 @@ class _RegistrarPageState extends State<RegistrarPage> {
         onPressed: () {
           onTapBtnSignUp();
         },
-        child: const Text('Registrar'),
+        child: const Text('Login'),
       ),
     );
   }
@@ -136,12 +124,12 @@ class _RegistrarPageState extends State<RegistrarPage> {
   Widget _buildRegistrar() {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacementNamed(context, "/login");
+        Navigator.pushReplacementNamed(context, "/registrar");
       },
       child: RichText(
           text: TextSpan(children: <InlineSpan>[
             TextSpan(
-              text: "Já tem uma conta?",
+              text: "Não tem uma conta?",
               style: TextStyle(
                   color: Colors.blueGrey.shade300,
                   fontSize: 12,
@@ -155,7 +143,7 @@ class _RegistrarPageState extends State<RegistrarPage> {
                   fontWeight: FontWeight.w700),
             ),
             TextSpan(
-              text: "Login",
+              text: "Registrar-se",
               style: TextStyle(
                   color: Colors.lightBlue.shade300,
                   fontSize: 12,
@@ -180,16 +168,15 @@ class _RegistrarPageState extends State<RegistrarPage> {
   void onTapBtnSignUp() {
     if (_key.currentState!.validate()) {
       final repo = AuthRepository();
-      repo
-          .registrar(emailController.text, senhaController.text)
-          .then((sucesso) {
-        if (sucesso) {
-          Navigator.pushReplacementNamed(context, "/home");
-        } else {
-          _exibirMensagem("E-mail já cadastrado");
-        }
+
+      repo.login(emailController.text, senhaController.text).then((_) {
+        Navigator.pushReplacementNamed(context, "/");
       }).catchError((e) {
-        _exibirMensagem(e.toString());
+        if (e is AuthException) {
+          _exibirMensagem("Falha na autenticação: ${e.message}");
+        } else {
+          _exibirMensagem("Ocorreu um erro inesperado: ${e.toString()}");
+        }
       });
     }
   }

@@ -1,20 +1,19 @@
 import 'package:expense_tracker/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegistrarPage extends StatefulWidget {
+  const RegistrarPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<RegistrarPage> createState() => _RegistrarPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistrarPageState extends State<RegistrarPage> {
   final _key = GlobalKey<FormState>();
-
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
-
-  bool obscureText = true;
+  final confirmarSenhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +34,8 @@ class _LoginPageState extends State<LoginPage> {
                     _buildEmail(),
                     const SizedBox(height: 20),
                     _buildSenha(),
+                    const SizedBox(height: 20),
+                    _buildConfirmarSenha(),
                     const SizedBox(height: 10),
                     _buildButton(),
                     const SizedBox(height: 10),
@@ -49,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Text _buildBemVindo() {
     return const Text(
-      "Bem Vindo!",
+      "Registrar-se",
       textAlign: TextAlign.center,
       style: TextStyle(
         fontWeight: FontWeight.bold,
@@ -88,21 +89,35 @@ class _LoginPageState extends State<LoginPage> {
         }
         return null;
       },
-      obscureText: obscureText,
-      decoration: InputDecoration(
+      obscureText: true,
+      decoration: const InputDecoration(
         border: OutlineInputBorder(),
         hintText: "Digite sua senha",
         prefixIcon: Icon(Icons.lock_outline_rounded),
-        suffixIcon: IconButton(
-          icon: obscureText
-              ? Icon(Icons.visibility_outlined)
-              : Icon(Icons.visibility_off_outlined),
-          onPressed: () {
-            setState(() {
-              obscureText = !obscureText;
-            });
-          },
-        ),
+        suffixIcon: Icon(Icons.visibility_outlined),
+      ),
+    );
+    // Icone para ocultar a senha visibility_off_outlined
+  }
+
+  TextFormField _buildConfirmarSenha() {
+    return TextFormField(
+      controller: confirmarSenhaController,
+      validator: (senha) {
+        if (senha == null || senha.isEmpty) {
+          return "Por favor, digite sua senha";
+        }
+        if (senha != senhaController.text) {
+          return "As senhas não coincidem";
+        }
+        return null;
+      },
+      obscureText: true,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: "Confirme sua senha",
+        prefixIcon: Icon(Icons.lock_outline_rounded),
+        suffixIcon: Icon(Icons.visibility_outlined),
       ),
     );
     // Icone para ocultar a senha visibility_off_outlined
@@ -115,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
           onTapBtnSignUp();
         },
-        child: const Text('Login'),
+        child: const Text('Registrar'),
       ),
     );
   }
@@ -123,12 +138,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildRegistrar() {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacementNamed(context, "/registrar");
+        Navigator.pushReplacementNamed(context, "/login");
       },
       child: RichText(
           text: TextSpan(children: <InlineSpan>[
             TextSpan(
-              text: "Não tem uma conta?",
+              text: "Já tem uma conta?",
               style: TextStyle(
                   color: Colors.blueGrey.shade300,
                   fontSize: 12,
@@ -142,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.w700),
             ),
             TextSpan(
-              text: "Registrar-se",
+              text: "Login",
               style: TextStyle(
                   color: Colors.lightBlue.shade300,
                   fontSize: 12,
@@ -167,11 +182,13 @@ class _LoginPageState extends State<LoginPage> {
   void onTapBtnSignUp() {
     if (_key.currentState!.validate()) {
       final repo = AuthRepository();
-      repo.login(emailController.text, senhaController.text).then((value) {
-        if (value) {
-          Navigator.pushReplacementNamed(context, "/home");
+      repo.registrar(emailController.text, senhaController.text).then((_) {
+        Navigator.pushReplacementNamed(context, "/login");
+      }).catchError((e) {
+        if (e is AuthException) {
+          _exibirMensagem("Falha na autenticação: ${e.message}");
         } else {
-          _exibirMensagem("E-mail ou senha inválidos");
+          _exibirMensagem("Ocorreu um erro inesperado: ${e.toString()}");
         }
       });
     }
