@@ -1,43 +1,36 @@
 // https://api.github.com/users/octocat
 // https://api.github.com/users/octocat/following
 
+// https://api.github.com/users/octocat
+// https://api.github.com/users/octocat/following
+
 import 'dart:convert';
 
-import 'package:github_api_demo/models/user.dart';
+import '../models/user.dart';
 import 'package:http/http.dart' as http;
 
-const token = "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";
+class GithubApi {
+  final String baseUrl = 'https://api.github.com/';
+  final String token = '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';
 
-Future<User?> getUserByName(String name) async {
-  final uri = Uri.parse("https://api.github.com/users/$name");
-  final response = await http.get(uri,  headers: {
+  Future<User?> findUser(String userName) async {
+    final url = '${baseUrl}users/$userName';
+    var response = await http.get(
+      Uri.parse(url),
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
-      },);
+      },
+    );
 
-  if(response.statusCode == 200){
-    final Map<String, dynamic> data = jsonDecode(response.body);
-    final user = User.fromJson(data);
-    return user;
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      var user = User.fromJson(json);
+
+      return user;
+    } else {
+      return null;
+    }
   }
-
-  return null;
-}
-
-Future<List<User>?> getFollowing(String name) async {
-  final uri = Uri.parse("https://api.github.com/users/$name/following");
-  final response = await http.get(uri,  headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-      },);
-
-  if (response.statusCode == 200){
-    final data = jsonDecode(response.body);
-    final List<User> users = data.map<User>((map) => User.fromJson(map)).toList();
-    return users;
-  }
-
-  return null;
 }

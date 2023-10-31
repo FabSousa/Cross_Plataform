@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FollowingPage extends StatefulWidget {
-  final String login;
-  final String avatarUrl;
-
-  const FollowingPage({Key? key, required this.login, required this.avatarUrl}) : super(key: key);
+  const FollowingPage();
 
   @override
   State<FollowingPage> createState() => _FollowingPageState();
@@ -22,7 +19,7 @@ class _FollowingPageState extends State<FollowingPage> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            child: Column(
+            child: const Column(
               children: [
                 SizedBox(
                   width: 120,
@@ -30,14 +27,16 @@ class _FollowingPageState extends State<FollowingPage> {
                   child: CircleAvatar(
                     radius: 50.0,
                     backgroundColor: Colors.blue,
-                    backgroundImage: NetworkImage(widget.avatarUrl)),
+                    backgroundImage: NetworkImage(
+                        "https://avatars.githubusercontent.com/u/583231?v=4"),
+                  ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 20,
                 ),
                 Text(
-                  widget.login,
-                  style: const TextStyle(fontSize: 22),
+                  "Octocat",
+                  style: TextStyle(fontSize: 22),
                 )
               ],
             ),

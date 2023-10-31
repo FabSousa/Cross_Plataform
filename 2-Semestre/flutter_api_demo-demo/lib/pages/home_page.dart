@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:github_api_demo/api/github_api.dart';
-import 'package:github_api_demo/models/user.dart';
-import 'package:github_api_demo/pages/following_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage();
@@ -87,26 +84,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(color: Colors.white),
                         ),
                 ),
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  User? response = await getUserByName(_controller.text);
-                    if(response == null){
-                      setState(() {
-                        isLoading = false;
-                        errorMessage = "Usuário não encontrado";
-                      });
-                    }else{
-                      setState(() {
-                        isLoading = false;
-                      });
-                      Navigator.push(context, 
-                      MaterialPageRoute(builder: (context) => 
-                      FollowingPage(login: response.login, avatarUrl: response.avatarUrl,)));
-                    }
-                  ;
-                },
+                onPressed: () {},
               )
             ]),
           ),

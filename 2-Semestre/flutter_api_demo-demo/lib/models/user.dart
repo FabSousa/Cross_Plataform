@@ -2,11 +2,12 @@ class User {
   final String login;
   final String avatarUrl;
 
-  User({required this.login, required this.avatarUrl});
+  User(this.login, this.avatarUrl);
 
-  factory User.fromJson(Map<String, dynamic> map) {
+  factory User.fromJson(Map json) {
     return User(
-        login: map['login'],
-        avatarUrl: map['avatarUrl']);
+      json['login'],
+      json['avatar_url'],
+    );
   }
 }
