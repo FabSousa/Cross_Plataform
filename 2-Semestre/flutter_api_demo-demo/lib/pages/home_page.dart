@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:github_api_demo/api/github_api.dart';
+import 'package:github_api_demo/pages/following_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage();
@@ -84,7 +86,31 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(color: Colors.white),
                         ),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  final username = _controller.text;
+                  final api = GithubApi();
+                  final user = await api.findUser(username);
+                  if (user == null) {
+                    setState(() {
+                      isLoading = false;
+                      errorMessage = "Usuario não encontrado";
+                    });
+                  } else {
+                    setState(() {
+                      isLoading = false;
+                      errorMessage = null;
+                      _controller.text = "";
+                    });
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                FollowingPage(user)));
+                  }
+                },
               )
             ]),
           ),
